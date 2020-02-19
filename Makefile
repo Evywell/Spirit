@@ -4,4 +4,4 @@ lint: vendor/autoload.php ## Analyse de code phpstan
 
 .PHONY: test
 test: vendor/autoload.php ## Exécute les tests unitaires PHPUNIT
-	php vendor/bin/phpunit --configuration phpunit.xml
+	php vendor/bin/phpunit
