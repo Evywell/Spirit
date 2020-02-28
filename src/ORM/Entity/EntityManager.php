@@ -27,6 +27,5 @@ class EntityManager implements EntityManagerInterface
 
     public function flush(): void
     {
-        
     }
 }
