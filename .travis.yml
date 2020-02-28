@@ -5,3 +5,4 @@ before_script:
   - composer install
   - make analyse
   - make test
+  - make lint

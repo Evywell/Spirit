@@ -4,7 +4,8 @@
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.11",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^9.0",
+        "squizlabs/php_codesniffer": "3.*"
     },
     "autoload": {
         "psr-4": {
@@ -14,7 +15,8 @@
     "autoload-dev": {
         "psr-4": {
             "Spirit\\Test\\" : "./tests/Unit",
-            "Spirit\\Test\\Driver\\" : "./tests/resources/Driver"
+            "Spirit\\Test\\Driver\\" : "./tests/resources/Driver",
+            "Spirit\\Test\\ORM\\" : "./tests/resources/ORM"
         }
     }
 }

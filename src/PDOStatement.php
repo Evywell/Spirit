@@ -3,7 +3,6 @@
 
 namespace Spirit;
 
-
 use Spirit\Driver\StatementInterface;
 
 class PDOStatement implements StatementInterface

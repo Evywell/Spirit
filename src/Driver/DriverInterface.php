@@ -17,5 +17,4 @@ interface DriverInterface
      * @return DatabaseBridgeInterface
      */
     public function connect(array $parameters, string $username, string $password): DatabaseBridgeInterface;
-
 }

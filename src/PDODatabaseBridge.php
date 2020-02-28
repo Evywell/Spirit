@@ -3,7 +3,6 @@
 
 namespace Spirit;
 
-
 use Spirit\Driver\DatabaseBridgeInterface;
 use Spirit\Driver\StatementInterface;
 
@@ -67,5 +66,5 @@ abstract class PDODatabaseBridge implements DatabaseBridgeInterface
         return $this->pdo->rollBack();
     }
 
-    public abstract function getDsn(): string;
+    abstract public function getDsn(): string;
 }

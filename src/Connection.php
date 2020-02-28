@@ -2,7 +2,6 @@
 
 namespace Spirit;
 
-
 use Spirit\Driver\DriverInterface;
 use Spirit\Exception\SpiritConnectionException;
 use Spirit\Exception\SpiritException;
@@ -44,5 +43,4 @@ class Connection
 
         return new Connection($settings, $driver);
     }
-
 }

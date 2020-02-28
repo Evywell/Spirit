@@ -3,7 +3,6 @@
 
 namespace Spirit\MySQL;
 
-
 use Spirit\PDODatabaseBridge;
 
 class MySQLDatabaseBridge extends PDODatabaseBridge

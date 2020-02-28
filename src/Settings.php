@@ -29,5 +29,4 @@ class Settings
     {
         return $this->drivers[$driverName] ?? null;
     }
-
 }

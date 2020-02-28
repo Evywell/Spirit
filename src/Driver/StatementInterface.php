@@ -33,5 +33,4 @@ interface StatementInterface
      * @return array<mixed,mixed>
      */
     public function fetchAll(int $fetchStyle): array;
-
 }

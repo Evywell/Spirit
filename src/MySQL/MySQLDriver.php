@@ -2,7 +2,6 @@
 
 namespace Spirit\MySQL;
 
-
 use Spirit\Driver\DatabaseBridgeInterface;
 use Spirit\Driver\DriverInterface;
 

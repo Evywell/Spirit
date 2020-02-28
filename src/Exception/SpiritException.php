@@ -3,7 +3,6 @@
 
 namespace Spirit\Exception;
 
-
 class SpiritException
 {
 
@@ -26,11 +25,11 @@ class SpiritException
     {
         return new SpiritConnectionException(
             sprintf(
-                "La classe %s n'est pas un driver valide ! %s doit implémenter l'interface Spirit\Driver\DriverInterface",
+                "La classe %s n'est pas un driver valide ! %s doit implémenter l'interface %s",
                 $driverClass,
-                $driverClass
+                $driverClass,
+                'Spirit\Driver\DriverInterface'
             )
         );
     }
-
 }

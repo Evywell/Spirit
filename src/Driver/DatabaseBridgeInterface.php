@@ -26,5 +26,4 @@ interface DatabaseBridgeInterface
     public function commit(): bool;
 
     public function rollback(): bool;
-
 }
