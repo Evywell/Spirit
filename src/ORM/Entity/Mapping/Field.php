@@ -23,6 +23,10 @@ class Field
         return $this;
     }
 
+    /**
+     * @param array<string,mixed> $options
+     * @return $this
+     */
     public function setOptions(array $options): self
     {
         $this->options = $options;

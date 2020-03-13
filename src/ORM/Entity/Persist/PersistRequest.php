@@ -27,5 +27,4 @@ class PersistRequest
 
         return $baseQuery;
     }
-
 }

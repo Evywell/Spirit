@@ -6,7 +6,7 @@ class EntityDiagram implements EntityDiagramInterface
 {
 
     /**
-     * @var array<string,array<string,mixed>>
+     * @var array<string,Field>
      */
     private array $fields;
     private string $tableName;

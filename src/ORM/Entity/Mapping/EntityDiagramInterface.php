@@ -16,7 +16,7 @@ interface EntityDiagramInterface
      */
     public function addField(string $fieldName, string $type, array $options = []): self;
 
-    /** @return array<string,array<string,mixed>> */
+    /** @return array<string,Field> */
     public function getFields(): array;
     public function getTableName(): string;
     public function getEntity(): string;
