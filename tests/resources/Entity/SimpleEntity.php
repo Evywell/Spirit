@@ -1,6 +1,6 @@
 <?php
 
-namespace Spirit\Test\ORM\Entity;
+namespace Spirit\Test\Entity;
 
 class SimpleEntity
 {

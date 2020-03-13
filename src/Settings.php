@@ -2,7 +2,7 @@
 
 namespace Spirit;
 
-use Spirit\Driver\DriverInterface;
+use Spirit\ORM\Entity\Mapping\EntityMapper;
 
 class Settings
 {
@@ -11,6 +11,13 @@ class Settings
      * @var array<string,string>
      */
     private array $drivers = [];
+
+    private EntityMapper $entityMapper;
+
+    public function __construct()
+    {
+        $this->entityMapper = new EntityMapper();
+    }
 
     /**
      * @param array<string,string> $drivers
@@ -28,5 +35,18 @@ class Settings
     public function getDriver(string $driverName): ?string
     {
         return $this->drivers[$driverName] ?? null;
+    }
+
+    public function getEntityMapper(): EntityMapper
+    {
+        return $this->entityMapper;
+    }
+
+    /**
+     * @param array<string,string> $entityMapping
+     */
+    public function setEntityMapping(array $entityMapping): void
+    {
+        $this->entityMapper->setMapping($entityMapping);
     }
 }

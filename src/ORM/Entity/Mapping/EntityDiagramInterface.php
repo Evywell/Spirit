@@ -1,6 +1,6 @@
 <?php
 
-namespace Spirit\ORM\Entity;
+namespace Spirit\ORM\Entity\Mapping;
 
 interface EntityDiagramInterface
 {
@@ -15,4 +15,9 @@ interface EntityDiagramInterface
      * @return EntityDiagramInterface
      */
     public function addField(string $fieldName, string $type, array $options = []): self;
+
+    /** @return array<string,array<string,mixed>> */
+    public function getFields(): array;
+    public function getTableName(): string;
+    public function getEntity(): string;
 }

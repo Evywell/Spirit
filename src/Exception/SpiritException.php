@@ -32,4 +32,18 @@ class SpiritException
             )
         );
     }
+
+    public static function alreadyPersistingWithAnOtherState(string $entityClass): PersistScheduleException
+    {
+        return new PersistScheduleException(
+            sprintf("L'entité %s est déjà en cours de persistance avec un autre état", $entityClass)
+        );
+    }
+
+    public static function noEntityMapped(string $entityClass): EntityMapperException
+    {
+        return new EntityMapperException(
+            sprintf("L'entité %s n'est pas enregistrée dans l'EntityMapper", $entityClass)
+        );
+    }
 }

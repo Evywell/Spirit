@@ -3,6 +3,7 @@
 namespace Spirit\Test\ORM\Entity;
 
 use PHPUnit\Framework\TestCase;
+use Spirit\Test\Entity\SimpleEntity;
 
 class EntityManagerTest extends TestCase
 {

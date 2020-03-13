@@ -1,11 +1,12 @@
 <?php
 
 
-namespace Spirit\Test\ORM\Entity;
+namespace Spirit\Test\Entity;
 
 
-use Spirit\ORM\Entity\EntityDescriberInterface;
-use Spirit\ORM\Entity\EntityDiagramInterface;
+
+use Spirit\ORM\Entity\Mapping\EntityDescriberInterface;
+use Spirit\ORM\Entity\Mapping\EntityDiagramInterface;
 
 class SimpleEntityDescriber implements EntityDescriberInterface
 {

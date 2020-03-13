@@ -1,6 +1,6 @@
 <?php
 
-namespace Spirit\ORM\Entity;
+namespace Spirit\ORM\Entity\Mapping;
 
 class EntityDiagram implements EntityDiagramInterface
 {
@@ -27,8 +27,11 @@ class EntityDiagram implements EntityDiagramInterface
      */
     public function addField(string $fieldName, string $type, array $options = []): EntityDiagramInterface
     {
-        $field = ['type' => $type];
-        $field['columnName'] = $options['columnName'] ?? $fieldName;
+        $field = new Field();
+        $field
+            ->setType($type)
+            ->setColumnName($options['columnName'] ?? $fieldName)
+            ->setOptions($options);
         $this->fields[$fieldName] = $field;
 
         return $this;
@@ -39,5 +42,23 @@ class EntityDiagram implements EntityDiagramInterface
         $this->entity = $entity;
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getFields(): array
+    {
+        return $this->fields;
+    }
+
+    public function getTableName(): string
+    {
+        return $this->tableName;
+    }
+
+    public function getEntity(): string
+    {
+        return $this->entity;
     }
 }

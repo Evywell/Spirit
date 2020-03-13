@@ -43,4 +43,9 @@ class Connection
 
         return new Connection($settings, $driver);
     }
+
+    public function getSettings(): Settings
+    {
+        return $this->settings;
+    }
 }

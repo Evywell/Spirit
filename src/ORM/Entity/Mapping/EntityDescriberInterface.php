@@ -1,6 +1,6 @@
 <?php
 
-namespace Spirit\ORM\Entity;
+namespace Spirit\ORM\Entity\Mapping;
 
 interface EntityDescriberInterface
 {
