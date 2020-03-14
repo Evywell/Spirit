@@ -33,6 +33,16 @@ class SpiritException
         );
     }
 
+    public static function cannotBeginTransaction(): SpiritConnectionException
+    {
+        return new SpiritConnectionException("Impossible de démarrer une transaction");
+    }
+
+    public static function cannotCommitTransaction(): SpiritConnectionException
+    {
+        return new SpiritConnectionException("Impossible de commit la transaction");
+    }
+
     public static function alreadyPersistingWithAnOtherState(string $entityClass): PersistScheduleException
     {
         return new PersistScheduleException(

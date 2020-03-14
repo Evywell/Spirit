@@ -9,22 +9,32 @@ class MySQLDriver implements DriverInterface
 {
 
     /**
+     * @var array<string,mixed>
+     */
+    private array $parameters;
+
+    /**
+     * @param array<string,mixed> $parameters
+     */
+    public function __construct(array $parameters)
+    {
+        $this->parameters = $parameters;
+    }
+
+    /**
      * @param array<string,mixed> $parameters
      * @return DriverInterface
      */
     public static function build(array $parameters): DriverInterface
     {
-        return new MySQLDriver();
+        return new MySQLDriver($parameters);
     }
 
-    /**
-     * @param array<string,mixed> $parameters
-     * @param string $username
-     * @param string $password
-     * @return DatabaseBridgeInterface
-     */
-    public function connect(array $parameters, string $username, string $password): DatabaseBridgeInterface
+    public function connect(): DatabaseBridgeInterface
     {
-        return new MySQLDatabaseBridge($parameters, $username, $password);
+        $username = $this->parameters['username'];
+        $password = $this->parameters['password'];
+
+        return new MySQLDatabaseBridge($this->parameters, $username, $password);
     }
 }

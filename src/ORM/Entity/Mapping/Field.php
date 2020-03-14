@@ -32,4 +32,9 @@ class Field
         $this->options = $options;
         return $this;
     }
+
+    public function getColumnName(): string
+    {
+        return $this->columnName;
+    }
 }

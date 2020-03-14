@@ -9,6 +9,7 @@ use Spirit\ORM\Entity\EntityManagerInterface;
 use Spirit\ORM\Entity\Mapping\EntityDiagram;
 use Spirit\ORM\Entity\Persist\PersistRequest;
 use Spirit\ORM\Entity\Persist\PersistSchedule;
+use Spirit\ORM\Entity\Persist\Schedule;
 use Spirit\Test\Entity\SimpleEntity;
 use Spirit\Test\Entity\SimpleEntityDescriber;
 
@@ -35,10 +36,12 @@ class PersistScheduleTest extends TestCase
         $reflectionProperty = $reflection->getProperty('schedules');
         $reflectionProperty->setAccessible(true);
         $schedules = $reflectionProperty->getValue($scheduler);
+        /** @var Schedule $schedule */
+        $schedule = $schedules[$objectId];
         /** @var PersistRequest $request */
-        $request = $schedules[$objectId]['request'];
+        $request = $schedule->getRequest();
         $this->assertNotEmpty($schedules);
         $this->assertInstanceOf(PersistRequest::class, $request);
-        $this->assertEquals("INSERT INTO simple (%s) VALUES (%s)", $request->getQuery());
+        $this->assertEquals("INSERT INTO simple (id, name) VALUES (?, ?);", $request->getQuery());
     }
 }

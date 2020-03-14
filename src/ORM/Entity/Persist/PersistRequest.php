@@ -5,6 +5,7 @@ namespace Spirit\ORM\Entity\Persist;
 
 use Spirit\ORM\Entity\EntityManagerInterface;
 use Spirit\ORM\Entity\Mapping\EntityDiagramInterface;
+use Spirit\ORM\Entity\Mapping\Field;
 
 class PersistRequest
 {
@@ -20,11 +21,32 @@ class PersistRequest
         $this->diagram = $diagram;
     }
 
+    /**
+     * @return array<string|int,mixed>
+     */
+    public function getParameters(): array
+    {
+        return [];
+    }
+
     public function getQuery(): string
     {
-        $columns = $this->diagram->getFields();
-        $baseQuery = "INSERT INTO {$this->diagram->getTableName()} (%s) VALUES (%s)";
+        $columns = array_reduce(
+            $this->diagram->getFields(),
+            function (array $carry, Field $field) {
+                $carry[] = $field->getColumnName();
+                return $carry;
+            },
+            []
+        );
+        $baseQuery = "INSERT INTO %s (%s) VALUES (%s);";
+        $parameters = rtrim(str_repeat('?, ', count($columns)), ', ');
 
-        return $baseQuery;
+        return sprintf(
+            $baseQuery,
+            $this->diagram->getTableName(),
+            implode(', ', $columns),
+            $parameters
+        );
     }
 }

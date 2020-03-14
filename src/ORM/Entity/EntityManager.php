@@ -6,12 +6,15 @@ use Spirit\Connection;
 use Spirit\ORM\Entity\Mapping\EntityDescriberInterface;
 use Spirit\ORM\Entity\Mapping\EntityDiagram;
 use Spirit\ORM\Entity\Mapping\EntityMapper;
+use Spirit\ORM\Entity\Persist\PersistRequest;
 use Spirit\ORM\Entity\Persist\PersistSchedule;
+use Spirit\ORM\Entity\Persist\Schedule;
 
 class EntityManager implements EntityManagerInterface
 {
 
     private Connection $connection;
+    /** @var PersistSchedule<string,Schedule>> */
     private PersistSchedule $scheduler;
     private EntityMapper $mapper;
 
@@ -36,6 +39,17 @@ class EntityManager implements EntityManagerInterface
 
     public function flush(): void
     {
+        // On démarre la transaction
+        // On exécute toutes les requêtes programmées
+        // On commit la transaction
+        $this->connection->createTransaction(function (Connection $connection) {
+            /** @var array<string,Schedule> $scheduledQuery */
+            foreach ($this->scheduler as $scheduledQuery) {
+                /** @var PersistRequest $request */
+                $request = $scheduledQuery['request'];
+                $connection->prepareAndExecute($request->getQuery(), $request->getParameters());
+            }
+        });
     }
 
     public function getConnection(): Connection

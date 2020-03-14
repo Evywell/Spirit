@@ -21,7 +21,7 @@ class SimpleDriver implements DriverInterface
     /**
      * @inheritDoc
      */
-    public function connect(array $parameters, string $username, string $password): DatabaseBridgeInterface
+    public function connect(): DatabaseBridgeInterface
     {
         return new SimpleDatabaseBridge();
     }

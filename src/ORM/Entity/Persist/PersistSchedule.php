@@ -7,14 +7,15 @@ use Spirit\Exception\SpiritException;
 use Spirit\ORM\Entity\EntityManagerInterface;
 use Spirit\ORM\Entity\Mapping\EntityDiagramInterface;
 
-class PersistSchedule
+class PersistSchedule implements \IteratorAggregate
 {
 
     /**
-     * @var array<string,array<string,mixed>>
+     * @var array<string,Schedule>
      */
     private array $schedules = [];
     private EntityManagerInterface $manager;
+    private int $index = 0;
 
     public function __construct(EntityManagerInterface $manager)
     {
@@ -34,14 +35,22 @@ class PersistSchedule
             case EntityManagerInterface::STATE_NEW:
                 // Dans le cas d'une nouvelle entité, il faut faire une requête d'insertion
                 // On enregistre donc une requête INSERT avec les paramètres à enregistrer
-                if (array_key_exists($id, $this->schedules) && $state !== $this->schedules[$id]['state']) {
+                if (array_key_exists($id, $this->schedules) && $state !== $this->schedules[$id]->getState()) {
                     throw SpiritException::alreadyPersistingWithAnOtherState(get_class($entity));
                 }
 
                 $request = new PersistRequest($this->manager, $entity, $diagram);
 
-                $this->schedules[$id] = ['state' => $state, 'request' => $request];
+                $this->schedules[$id] = new Schedule($state, $request);
                 break;
         }
+    }
+
+    /**
+     * @return \Traversable<string,Schedule>
+     */
+    public function getIterator(): \Traversable
+    {
+        return new \ArrayIterator($this->schedules);
     }
 }
