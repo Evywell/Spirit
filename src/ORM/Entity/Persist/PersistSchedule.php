@@ -15,7 +15,10 @@ class PersistSchedule implements \IteratorAggregate
      */
     private array $schedules = [];
     private EntityManagerInterface $manager;
-    private int $index = 0;
+    /**
+     * @var array<string,PersistRequest>
+     */
+    private array $persistRequestsCache = [];
 
     public function __construct(EntityManagerInterface $manager)
     {
@@ -38,10 +41,16 @@ class PersistSchedule implements \IteratorAggregate
                 if (array_key_exists($id, $this->schedules) && $state !== $this->schedules[$id]->getState()) {
                     throw SpiritException::alreadyPersistingWithAnOtherState(get_class($entity));
                 }
+                // A-t-on déjà créé une PersistRequest de ce type d'entité ?
+                $entityClassName = get_class($entity);
+                if (array_key_exists($entityClassName, $this->persistRequestsCache)) {
+                    $request = $this->persistRequestsCache[$entityClassName];
+                } else {
+                    $request = new PersistRequest($this->manager, $entity, $diagram);
+                    $this->persistRequestsCache[$entityClassName] = $request;
+                }
 
-                $request = new PersistRequest($this->manager, $entity, $diagram);
-
-                $this->schedules[$id] = new Schedule($state, $request);
+                $this->schedules[$id] = new Schedule($state, $request, []);
                 break;
         }
     }

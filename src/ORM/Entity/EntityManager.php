@@ -43,11 +43,11 @@ class EntityManager implements EntityManagerInterface
         // On exécute toutes les requêtes programmées
         // On commit la transaction
         $this->connection->createTransaction(function (Connection $connection) {
-            /** @var array<string,Schedule> $scheduledQuery */
+            /** @var Schedule $scheduledQuery */
             foreach ($this->scheduler as $scheduledQuery) {
                 /** @var PersistRequest $request */
-                $request = $scheduledQuery['request'];
-                $connection->prepareAndExecute($request->getQuery(), $request->getParameters());
+                $request = $scheduledQuery->getRequest();
+                $connection->prepareAndExecute($request->getQuery(), $scheduledQuery->getParameters());
             }
         });
     }

@@ -21,14 +21,6 @@ class PersistRequest
         $this->diagram = $diagram;
     }
 
-    /**
-     * @return array<string|int,mixed>
-     */
-    public function getParameters(): array
-    {
-        return [];
-    }
-
     public function getQuery(): string
     {
         $columns = array_reduce(
