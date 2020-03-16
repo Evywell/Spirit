@@ -6,28 +6,15 @@ namespace Spirit\ORM\Entity\Persist;
 class Schedule
 {
 
-    private int $state;
+    private object $entity;
     private PersistRequest $request;
-    /**
-     * @var array<string|int,mixed>
-     */
-    private array $parameters;
+    private int $state;
 
-    /**
-     * @param int $state
-     * @param PersistRequest $request
-     * @param array<string|int,mixed> $parameters
-     */
-    public function __construct(int $state, PersistRequest $request, array $parameters)
+    public function __construct(object $entity, PersistRequest $request, int $state)
     {
-        $this->state = $state;
+        $this->entity = $entity;
         $this->request = $request;
-        $this->parameters = $parameters;
-    }
-
-    public function getState(): int
-    {
-        return $this->state;
+        $this->state = $state;
     }
 
     public function getRequest(): PersistRequest
@@ -40,6 +27,11 @@ class Schedule
      */
     public function getParameters(): array
     {
-        return $this->parameters;
+        return $this->request->resolveParameters($this->entity);
+    }
+
+    public function getState(): int
+    {
+        return $this->state;
     }
 }

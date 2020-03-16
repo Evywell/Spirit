@@ -1,6 +1,7 @@
 {
     "require": {
-        "php": "7.4.*"
+        "php": "7.4.*",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12.11",
@@ -17,7 +18,8 @@
         "psr-4": {
             "Spirit\\Test\\" : "./tests/Unit",
             "Spirit\\Test\\Driver\\" : "./tests/resources/Driver",
-            "Spirit\\Test\\Entity\\" : "./tests/resources/Entity"
+            "Spirit\\Test\\Entity\\" : "./tests/resources/Entity",
+            "Spirit\\Test\\Accessor\\" : "./tests/resources/Accessor"
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace Spirit;
 
 use Spirit\ORM\Entity\Mapping\EntityMapper;
+use Spirit\ORM\Entity\Mapping\MappingTypeHandler;
 
 class Settings
 {
@@ -13,10 +14,12 @@ class Settings
     private array $drivers = [];
 
     private EntityMapper $entityMapper;
+    private MappingTypeHandler $mappingTypeHandler;
 
     public function __construct()
     {
         $this->entityMapper = new EntityMapper();
+        $this->mappingTypeHandler = new MappingTypeHandler();
     }
 
     /**
@@ -48,5 +51,10 @@ class Settings
     public function setEntityMapping(array $entityMapping): void
     {
         $this->entityMapper->setMapping($entityMapping);
+    }
+
+    public function getMappingTypeHandler(): MappingTypeHandler
+    {
+        return $this->mappingTypeHandler;
     }
 }

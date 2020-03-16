@@ -2,15 +2,25 @@
 
 namespace Spirit\ORM\Entity\Mapping;
 
+use Spirit\ORM\Entity\EntityManagerInterface;
+
 class EntityDiagram implements EntityDiagramInterface
 {
 
+    private EntityManagerInterface $manager;
+    private MappingTypeHandler $mappingTypeHandler;
     /**
      * @var array<string,Field>
      */
     private array $fields;
     private string $tableName;
     private string $entity;
+
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+        $this->mappingTypeHandler = $this->manager->getConnection()->getSettings()->getMappingTypeHandler();
+    }
 
     public function setTableName(string $tableName): EntityDiagramInterface
     {
@@ -27,8 +37,9 @@ class EntityDiagram implements EntityDiagramInterface
      */
     public function addField(string $fieldName, string $type, array $options = []): EntityDiagramInterface
     {
-        $field = new Field();
+        $field = $this->mappingTypeHandler->process($fieldName, $type, $options) ?? new Field();
         $field
+            ->setFieldName($fieldName)
             ->setType($type)
             ->setColumnName($options['columnName'] ?? $fieldName)
             ->setOptions($options);

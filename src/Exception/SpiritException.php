@@ -6,6 +6,8 @@ namespace Spirit\Exception;
 class SpiritException
 {
 
+    // DRIVER EXCEPTIONS
+
     public static function noDriverSpecified(): SpiritConnectionException
     {
         return new SpiritConnectionException("Vous devez spécifier un driver dans les paramètre de connexion !");
@@ -33,6 +35,8 @@ class SpiritException
         );
     }
 
+    // CONNECTION EXCEPTIONS
+
     public static function cannotBeginTransaction(): SpiritConnectionException
     {
         return new SpiritConnectionException("Impossible de démarrer une transaction");
@@ -43,12 +47,16 @@ class SpiritException
         return new SpiritConnectionException("Impossible de commit la transaction");
     }
 
+    // PERSISTSCHEDULE EXCEPTIONS
+
     public static function alreadyPersistingWithAnOtherState(string $entityClass): PersistScheduleException
     {
         return new PersistScheduleException(
             sprintf("L'entité %s est déjà en cours de persistance avec un autre état", $entityClass)
         );
     }
+
+    // ENTITYMAPPER EXCEPTION
 
     public static function noEntityMapped(string $entityClass): EntityMapperException
     {

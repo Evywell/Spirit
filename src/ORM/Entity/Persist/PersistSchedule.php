@@ -46,11 +46,11 @@ class PersistSchedule implements \IteratorAggregate
                 if (array_key_exists($entityClassName, $this->persistRequestsCache)) {
                     $request = $this->persistRequestsCache[$entityClassName];
                 } else {
-                    $request = new PersistRequest($this->manager, $entity, $diagram);
+                    $request = new PersistRequest($this->manager, $diagram, $diagram->getFields());
                     $this->persistRequestsCache[$entityClassName] = $request;
                 }
 
-                $this->schedules[$id] = new Schedule($state, $request, []);
+                $this->schedules[$id] = new Schedule($entity, $request, $state);
                 break;
         }
     }

@@ -3,6 +3,7 @@
 namespace Spirit\ORM\Entity;
 
 use Spirit\Connection;
+use Spirit\Exception\EntityManagerException;
 use Spirit\ORM\Entity\Mapping\EntityDescriberInterface;
 use Spirit\ORM\Entity\Mapping\EntityDiagram;
 use Spirit\ORM\Entity\Mapping\EntityMapper;
@@ -31,7 +32,7 @@ class EntityManager implements EntityManagerInterface
         $describerClass = $this->mapper->get(get_class($object));
         /** @var EntityDescriberInterface $describer */
         $describer = new $describerClass();
-        $diagram = new EntityDiagram();
+        $diagram = new EntityDiagram($this);
         $describer->describe($diagram);
         $id = spl_object_hash($object);
         $this->scheduler->schedule($id, $object, self::STATE_NEW, $diagram);
@@ -47,7 +48,11 @@ class EntityManager implements EntityManagerInterface
             foreach ($this->scheduler as $scheduledQuery) {
                 /** @var PersistRequest $request */
                 $request = $scheduledQuery->getRequest();
-                $connection->prepareAndExecute($request->getQuery(), $scheduledQuery->getParameters());
+                $statement = $request->getPreparedStatement();
+                if ($statement === null) {
+                    throw new EntityManagerException("Impossible de préparer la requête");
+                }
+                $connection->execute($statement, $scheduledQuery->getParameters());
             }
         });
     }

@@ -6,6 +6,7 @@ namespace Spirit\ORM\Entity\Mapping;
 class Field
 {
 
+    private string $fieldName;
     private string $type;
     private string $columnName;
     /** @var array<string,mixed> */
@@ -36,5 +37,16 @@ class Field
     public function getColumnName(): string
     {
         return $this->columnName;
+    }
+
+    public function getFieldName(): string
+    {
+        return $this->fieldName;
+    }
+
+    public function setFieldName(string $fieldName): self
+    {
+        $this->fieldName = $fieldName;
+        return $this;
     }
 }

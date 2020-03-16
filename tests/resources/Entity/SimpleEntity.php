@@ -8,13 +8,15 @@ class SimpleEntity
     private int $id;
     private string $name;
 
-    /**
-     * @param mixed $name
-     * @return SimpleEntity
-     */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
         return $this;
     }
 
