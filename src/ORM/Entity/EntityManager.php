@@ -32,7 +32,7 @@ class EntityManager implements EntityManagerInterface
         $describerClass = $this->mapper->get(get_class($object));
         /** @var EntityDescriberInterface $describer */
         $describer = new $describerClass();
-        $diagram = new EntityDiagram($this);
+        $diagram = new EntityDiagram($this, $this->connection->getSettings()->getMappingTypeHandler());
         $describer->describe($diagram);
         $id = spl_object_hash($object);
         $this->scheduler->schedule($id, $object, self::STATE_NEW, $diagram);

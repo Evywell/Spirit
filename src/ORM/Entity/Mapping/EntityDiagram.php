@@ -16,10 +16,10 @@ class EntityDiagram implements EntityDiagramInterface
     private string $tableName;
     private string $entity;
 
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(EntityManagerInterface $manager, MappingTypeHandler $mappingTypeHandler)
     {
         $this->manager = $manager;
-        $this->mappingTypeHandler = $this->manager->getConnection()->getSettings()->getMappingTypeHandler();
+        $this->mappingTypeHandler = $mappingTypeHandler;
     }
 
     public function setTableName(string $tableName): EntityDiagramInterface
@@ -27,6 +27,16 @@ class EntityDiagram implements EntityDiagramInterface
         $this->tableName = $tableName;
 
         return $this;
+    }
+
+    /**
+     * @param string $fieldName
+     * @param array<string,mixed> $options
+     * @return EntityDiagramInterface
+     */
+    public function increment(string $fieldName, array $options = []): EntityDiagramInterface
+    {
+        return $this->addField($fieldName, 'integer', array_merge($options, ['extra' => 'AUTO_INCREMENT']));
     }
 
     /**
@@ -61,6 +71,16 @@ class EntityDiagram implements EntityDiagramInterface
     public function getFields(): array
     {
         return $this->fields;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getWritableFields(): array
+    {
+        return array_values(array_filter($this->fields, function (Field $field) {
+            return !$field->isReadOnly();
+        }));
     }
 
     public function getTableName(): string

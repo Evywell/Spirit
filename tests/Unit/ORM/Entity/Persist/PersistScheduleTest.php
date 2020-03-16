@@ -7,6 +7,7 @@ namespace Spirit\Test\ORM\Entity\Persist;
 use PHPUnit\Framework\TestCase;
 use Spirit\ORM\Entity\EntityManagerInterface;
 use Spirit\ORM\Entity\Mapping\EntityDiagram;
+use Spirit\ORM\Entity\Mapping\MappingTypeHandler;
 use Spirit\ORM\Entity\Persist\PersistRequest;
 use Spirit\ORM\Entity\Persist\PersistSchedule;
 use Spirit\ORM\Entity\Persist\Schedule;
@@ -22,7 +23,7 @@ class PersistScheduleTest extends TestCase
         $em = $this->createMock(EntityManagerInterface::class);
 
         $scheduler = new PersistSchedule($em);
-        $diagram = new EntityDiagram($em);
+        $diagram = new EntityDiagram($em, new MappingTypeHandler());
         $describer = new SimpleEntityDescriber();
         $describer->describe($diagram);
 
@@ -51,7 +52,7 @@ class PersistScheduleTest extends TestCase
         $em = $this->createMock(EntityManagerInterface::class);
 
         $scheduler = new PersistSchedule($em);
-        $diagram = new EntityDiagram($em);
+        $diagram = new EntityDiagram($em, new MappingTypeHandler());
         $describer = new SimpleEntityDescriber();
         $describer->describe($diagram);
 

@@ -6,7 +6,12 @@ namespace Spirit\ORM\Entity\Mapping;
 interface MappingTypeInterface
 {
 
-    public function canManage(string $type): bool;
+    /**
+     * @param string $type
+     * @param array<string,mixed> $options
+     * @return bool
+     */
+    public function canManage(string $type, array $options): bool;
 
     /**
      * @param string $fieldName

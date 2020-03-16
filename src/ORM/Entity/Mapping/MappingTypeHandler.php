@@ -30,7 +30,7 @@ class MappingTypeHandler
 
         /** @var MappingTypeInterface $handler */
         foreach ($this->handlers as $handler) {
-            if ($handler->canManage($type)) {
+            if ($handler->canManage($type, $options)) {
                 return $handler->process($fieldName, $type, $options);
             }
         }

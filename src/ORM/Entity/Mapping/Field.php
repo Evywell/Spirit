@@ -12,6 +12,8 @@ class Field
     /** @var array<string,mixed> */
     private array $options;
 
+    protected bool $readOnly = false;
+
     public function setType(string $type): self
     {
         $this->type = $type;
@@ -48,5 +50,10 @@ class Field
     {
         $this->fieldName = $fieldName;
         return $this;
+    }
+
+    public function isReadOnly(): bool
+    {
+        return $this->readOnly;
     }
 }

@@ -46,7 +46,7 @@ class PersistSchedule implements \IteratorAggregate
                 if (array_key_exists($entityClassName, $this->persistRequestsCache)) {
                     $request = $this->persistRequestsCache[$entityClassName];
                 } else {
-                    $request = new PersistRequest($this->manager, $diagram, $diagram->getFields());
+                    $request = new PersistRequest($this->manager, $diagram, $diagram->getWritableFields());
                     $this->persistRequestsCache[$entityClassName] = $request;
                 }
 
