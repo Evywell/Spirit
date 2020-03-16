@@ -11,9 +11,10 @@ Le fonctionnement de cet "ORM" est fortement inspiré par Doctrine mais n'a pas 
 **Je fais ce projet simplement pour m'entraîner en dev, C'EST TOUT !**
 
 ## Roadmap 
-- [ ] Création des bases (Connection, Driver, etc.) _en cours_
-- [ ] Description d'une entité
-- [ ] Persistance d'une entité (EntityManager)
+- [x] Création des bases (Connection, Driver, etc.) _en cours_
+- [x] Description d'une entité
+- [x] Persistance d'une entité (EntityManager)
+- [ ] Persistance d'une entité avec une relation OneToOne
 - more...
 
 ## Fonctionnement général
