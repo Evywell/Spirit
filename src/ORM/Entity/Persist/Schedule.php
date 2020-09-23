@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spirit\ORM\Entity\Persist;
 
 class Schedule

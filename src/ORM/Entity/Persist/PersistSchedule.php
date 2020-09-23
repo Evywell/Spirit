@@ -1,12 +1,14 @@
 <?php
 
-
 namespace Spirit\ORM\Entity\Persist;
 
 use Spirit\Exception\SpiritException;
 use Spirit\ORM\Entity\EntityManagerInterface;
 use Spirit\ORM\Entity\Mapping\EntityDiagramInterface;
 
+/**
+ * @implements \IteratorAggregate<string,Schedule>
+ */
 class PersistSchedule implements \IteratorAggregate
 {
 

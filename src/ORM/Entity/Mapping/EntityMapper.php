@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spirit\ORM\Entity\Mapping;
 
 use Spirit\Exception\SpiritException;

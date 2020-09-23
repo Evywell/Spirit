@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spirit;
 
 use Spirit\Driver\DatabaseBridgeInterface;

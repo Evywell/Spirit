@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spirit\Exception;
 
 class SpiritException

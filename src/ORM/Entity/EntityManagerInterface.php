@@ -8,7 +8,7 @@ use Spirit\ORM\Entity\Mapping\EntityMapper;
 interface EntityManagerInterface
 {
 
-    const STATE_NEW = 0;
+    public const STATE_NEW = 0;
 
     public function persist(object $object): void;
 

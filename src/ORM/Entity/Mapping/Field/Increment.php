@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spirit\ORM\Entity\Mapping\Field;
 
 use Spirit\ORM\Entity\Mapping\Field;

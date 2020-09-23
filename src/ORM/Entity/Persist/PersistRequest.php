@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spirit\ORM\Entity\Persist;
 
 use Spirit\Driver\StatementInterface;

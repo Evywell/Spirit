@@ -1,11 +1,13 @@
 <?php
 
-
 namespace Spirit\Tools\Accessor;
 
 class ObjectAccessor
 {
 
+    /**
+     * @var \ReflectionClass<object>|null
+     */
     private ?\ReflectionClass $reflection = null;
     private object $subject;
 
@@ -56,6 +58,10 @@ class ObjectAccessor
             $property->getValue($this->subject);
     }
 
+    /**
+     * @return \ReflectionClass<object>
+     * @throws \ReflectionException
+     */
     private function getReflection(): \ReflectionClass
     {
         if ($this->reflection === null) {
